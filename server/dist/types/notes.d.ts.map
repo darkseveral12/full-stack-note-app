@@ -1,0 +1,1 @@
+{"version":3,"file":"notes.d.ts","sourceRoot":"","sources":["../../src/types/notes.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,QAAQ;IACvB,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,OAAO,CAAC,EAAE,MAAM,CAAC;IACjB,MAAM,CAAC,EAAE,OAAO,CAAC;IACjB,IAAI,CAAC,EAAE,MAAM,EAAE,CAAC;IAChB,SAAS,EAAE,IAAI,CAAC;IAChB,SAAS,EAAE,IAAI,CAAC;CACjB"}
