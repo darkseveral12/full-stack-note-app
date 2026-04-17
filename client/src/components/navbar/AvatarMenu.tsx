@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 const AvatarMenu = () => {
   const { user } = useAuth();
   const { data, isSuccess, refetch } = useFetch(
-    "https://full-stack-note-app-1-czf8.onrender.com/auth/logout",
+    "https://full-stack-note-app-izwn.vercel.app/auth/logout",
     false,
     ["logout"],
   );
