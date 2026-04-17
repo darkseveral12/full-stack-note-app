@@ -29,7 +29,6 @@ const authMiddleware = (
   if (!token) {
     return response.status(401).json({ error: "Unauthorized" });
   }
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string);
     console.log(decoded);
