@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://full-stack-note-app-fi75.vercel.app",
+      "https://full-stack-note-app-fi75-l6yvcinr3-darkseveral12s-projects.vercel.app",
     ],
     credentials: true,
   }),
