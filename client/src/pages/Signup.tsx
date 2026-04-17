@@ -39,7 +39,7 @@ const Signup = () => {
   const password = watch("password");
   const onSubmit: SubmitHandler<UserFormDetails> = (data) => {
     const promise = mutateAsync({
-      url: "http://localhost:3000/auth/signup",
+      url: "https://full-stack-note-app-1-czf8.onrender.com/auth/signup",
       method: "POST",
       data,
     });

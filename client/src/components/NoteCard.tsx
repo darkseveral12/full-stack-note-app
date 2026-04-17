@@ -27,7 +27,7 @@ const NoteCard = ({ data }: { data: IFormInput }) => {
 
   const handleClick = async () => {
     await mutateAsync({
-      url: `http://localhost:3000/api/notes/${data._id}`,
+      url: `https://full-stack-note-app-1-czf8.onrender.com/api/notes/${data._id}`,
       method: "DELETE",
     });
 

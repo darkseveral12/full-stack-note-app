@@ -35,7 +35,7 @@ const Login = () => {
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<UserCredentials> = async (data) => {
     const promise = mutateAsync({
-      url: "http://localhost:3000/auth/login",
+      url: "https://full-stack-note-app-1-czf8.onrender.com/auth/login",
       method: "POST",
       data,
     });

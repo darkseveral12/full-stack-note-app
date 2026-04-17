@@ -40,8 +40,8 @@ const FormNote = ({
 
     const promise = mutateAsync({
       url: isEdit
-        ? `http://localhost:3000/api/notes/${newdata._id}`
-        : "http://localhost:3000/api/notes",
+        ? `https://full-stack-note-app-1-czf8.onrender.com/api/notes/${newdata._id}`
+        : "https://full-stack-note-app-1-czf8.onrender.com/api/notes",
 
       data,
       method: isEdit ? "PATCH" : "POST",
