@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 const AvatarMenu = () => {
   const { user } = useAuth();
   const { data, isSuccess, refetch } = useFetch(
-    `${import.meta.env.VITE_API_BASE_VERCEL}/auth/logout`,
+    `${import.meta.env.VITE_API_BACKEND_URL}/auth/logout`,
     false,
     ["logout"],
   );
