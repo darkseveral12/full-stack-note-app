@@ -10,6 +10,7 @@ interface FormNoteProps {
   setOpen: (open: boolean) => void;
   onSubmittingChange: (isSubmitting: boolean) => void;
   newdata?: IFormInput;
+  body?: React.ReactNode;
 }
 
 const FormNote = ({
@@ -17,6 +18,7 @@ const FormNote = ({
   setOpen,
   onSubmittingChange,
   newdata,
+  body,
 }: FormNoteProps) => {
   const BACKEND_URL = import.meta.env.VITE_API_BACKEND_URL;
   const {
@@ -85,64 +87,68 @@ const FormNote = ({
   return (
     <form id={id} onSubmit={handleSubmit(onSubmit)}>
       <Fieldset.Root size="lg" maxW="md">
-        <Fieldset.Content>
-          <Field.Root invalid={!!errors.title}>
-            <Field.Label>Title</Field.Label>
-            <Input
-              {...register("title", {
-                required: "Title is required",
-              })}
-              placeholder="Enter note title..."
-              disabled={isSubmitting}
+        {body ? (
+          body
+        ) : (
+          <Fieldset.Content>
+            <Field.Root invalid={!!errors.title}>
+              <Field.Label>Title</Field.Label>
+              <Input
+                {...register("title", {
+                  required: "Title is required",
+                })}
+                placeholder="Enter note title..."
+                disabled={isSubmitting}
+              />
+
+              <Field.ErrorText>{errors.title?.message}</Field.ErrorText>
+            </Field.Root>
+
+            <Field.Root invalid={!!errors.content}>
+              <Field.Label>Content</Field.Label>
+              <Textarea
+                {...register("content", {
+                  required: "Content is required",
+                  minLength: {
+                    value: 4,
+                    message: "The Content must atleast have 4 characters.",
+                  },
+                })}
+                placeholder="Comment..."
+                disabled={isSubmitting}
+              />
+              <Field.ErrorText>{errors.content?.message}</Field.ErrorText>
+            </Field.Root>
+
+            <Controller
+              name="tags"
+              control={control}
+              defaultValue={[]}
+              rules={{
+                required: "Tags are required",
+                validate: (tags) =>
+                  (tags && tags.length >= 3) || "Must have at least 3 tags",
+              }}
+              render={({ field }) => (
+                <Field.Root invalid={!!errors.tags}>
+                  <TagsInput.Root
+                    disabled={isSubmitting}
+                    value={field.value}
+                    onValueChange={(details) => field.onChange(details.value)}
+                    delimiter={SPLIT_REGEX}
+                  >
+                    <TagsInput.Label>Tags</TagsInput.Label>
+                    <TagsInput.Control>
+                      <TagsInput.Items />
+                      <TagsInput.Input placeholder="Add tag..." />
+                    </TagsInput.Control>
+                    <Field.ErrorText>{errors.tags?.message}</Field.ErrorText>
+                  </TagsInput.Root>
+                </Field.Root>
+              )}
             />
-
-            <Field.ErrorText>{errors.title?.message}</Field.ErrorText>
-          </Field.Root>
-
-          <Field.Root invalid={!!errors.content}>
-            <Field.Label>Content</Field.Label>
-            <Textarea
-              {...register("content", {
-                required: "Content is required",
-                minLength: {
-                  value: 4,
-                  message: "The Content must atleast have 4 characters.",
-                },
-              })}
-              placeholder="Comment..."
-              disabled={isSubmitting}
-            />
-            <Field.ErrorText>{errors.content?.message}</Field.ErrorText>
-          </Field.Root>
-
-          <Controller
-            name="tags"
-            control={control}
-            defaultValue={[]}
-            rules={{
-              required: "Tags are required",
-              validate: (tags) =>
-                (tags && tags.length >= 3) || "Must have at least 3 tags",
-            }}
-            render={({ field }) => (
-              <Field.Root invalid={!!errors.tags}>
-                <TagsInput.Root
-                  disabled={isSubmitting}
-                  value={field.value}
-                  onValueChange={(details) => field.onChange(details.value)}
-                  delimiter={SPLIT_REGEX}
-                >
-                  <TagsInput.Label>Tags</TagsInput.Label>
-                  <TagsInput.Control>
-                    <TagsInput.Items />
-                    <TagsInput.Input placeholder="Add tag..." />
-                  </TagsInput.Control>
-                  <Field.ErrorText>{errors.tags?.message}</Field.ErrorText>
-                </TagsInput.Root>
-              </Field.Root>
-            )}
-          />
-        </Fieldset.Content>
+          </Fieldset.Content>
+        )}
       </Fieldset.Root>
     </form>
   );

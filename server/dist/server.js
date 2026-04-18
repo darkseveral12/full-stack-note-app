@@ -6,11 +6,18 @@ import { noteRouter } from "./routes/noteRouter.js";
 import { authRoutes } from "./routes/authRoutes.js";
 import { authMiddleware } from "./middleware/authMiddleware.js";
 import cookieParser from "cookie-parser";
-dotenv.config();
+const env = process.env.NODE_ENV || "development";
+dotenv.config({
+    path: `.env.${env}`,
+});
 const mongoDBURL = process.env.DB_URL;
+const VERCEL_URL = process.env.VITE_VERCEL;
 console.log(mongoDBURL);
 const app = express();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({
+    origin: ["http://localhost:5173", VERCEL_URL],
+    credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

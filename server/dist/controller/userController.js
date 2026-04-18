@@ -10,6 +10,8 @@ export const post_login = async function (request, response) {
             const token = createToken(user._id);
             response.cookie("token", token, {
                 httpOnly: true,
+                secure: true,
+                sameSite: "none",
                 maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
             });
             response.status(200).json({ user });
@@ -34,6 +36,8 @@ export const post_signup = async function (request, response) {
             const token = createToken(user._id);
             response.cookie("token", token, {
                 httpOnly: true,
+                secure: true,
+                sameSite: "none",
                 maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
             });
             response.status(200).json({ user });

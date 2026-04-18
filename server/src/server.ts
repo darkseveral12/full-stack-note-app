@@ -7,7 +7,11 @@ import { authRoutes } from "./routes/authRoutes.js";
 import { authMiddleware } from "./middleware/authMiddleware.js";
 import cookieParser from "cookie-parser";
 
-dotenv.config();
+const env = process.env.NODE_ENV || "development";
+
+dotenv.config({
+  path: `.env.${env}`,
+});
 
 const mongoDBURL = process.env.DB_URL;
 const VERCEL_URL = process.env.VITE_VERCEL;

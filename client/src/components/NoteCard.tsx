@@ -9,33 +9,17 @@ import {
   TagCloseTrigger,
 } from "@chakra-ui/react";
 import { VscPinned } from "react-icons/vsc";
-import { BiTrash } from "react-icons/bi";
-import useRequest from "../hooks/useRequest";
-import { Spinner } from "@chakra-ui/react";
-import { toaster } from "../components/ui/toaster";
+
 import { HiPlus } from "react-icons/hi";
 import { formatDistanceToNow } from "date-fns";
 import type { IFormInput } from "../types/NoteInput";
 import { useContext } from "react";
 import { TagsContext } from "../context/TagsProvider";
 import EditNote from "./EditNote";
+import DeleteNote from "./DeleteNote";
 
 const NoteCard = ({ data }: { data: IFormInput }) => {
   const { tag, clickTag } = useContext(TagsContext);
-
-  const { mutateAsync, isPending } = useRequest();
-
-  const handleClick = async () => {
-    await mutateAsync({
-      url: `https://full-stack-note-app-1-czf8.onrender.com/api/notes/${data._id}`,
-      method: "DELETE",
-    });
-
-    toaster.create({
-      title: "Deleted a note",
-      type: "success",
-    });
-  };
 
   return (
     <Card.Root variant="outline">
@@ -92,13 +76,8 @@ const NoteCard = ({ data }: { data: IFormInput }) => {
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
         <EditNote data={data} />
-        <IconButton
-          onClick={handleClick}
-          colorPalette={"red"}
-          disabled={isPending}
-        >
-          {isPending ? <Spinner /> : <BiTrash />}
-        </IconButton>
+
+        <DeleteNote data={data} />
       </Card.Footer>
     </Card.Root>
   );
