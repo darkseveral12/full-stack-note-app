@@ -35,7 +35,7 @@ const Signup = () => {
   } = useForm<UserFormDetails>();
   const { mutateAsync } = useRequest();
   const { setUser } = useAuth();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
+  const API_BASE_URL = import.meta.env.VITE_API_BACKEND_URL as string;
   // eslint-disable-next-line react-hooks/incompatible-library
   const password = watch("password");
   const onSubmit: SubmitHandler<UserFormDetails> = (data) => {
