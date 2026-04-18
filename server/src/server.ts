@@ -10,15 +10,13 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const mongoDBURL = process.env.DB_URL;
+const VERCEL_URL = process.env.VITE_VERCEL;
 console.log(mongoDBURL);
 const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://full-stack-note-app-lovat.vercel.app",
-    ],
+    origin: ["http://localhost:5173", VERCEL_URL as string],
     credentials: true,
   }),
 );

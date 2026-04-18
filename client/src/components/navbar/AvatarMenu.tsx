@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 const AvatarMenu = () => {
   const { user } = useAuth();
   const { data, isSuccess, refetch } = useFetch(
-    "https://full-stack-note-app-izwn.vercel.app/auth/logout",
+    `${import.meta.env.VITE_API_BASE_VERCEL}/auth/logout`,
     false,
     ["logout"],
   );
