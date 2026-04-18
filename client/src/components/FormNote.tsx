@@ -18,7 +18,7 @@ const FormNote = ({
   onSubmittingChange,
   newdata,
 }: FormNoteProps) => {
-  const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
+  const BACKEND_URL = import.meta.env.VITE_API_BACKEND_URL;
   const {
     register,
     handleSubmit,
@@ -41,8 +41,8 @@ const FormNote = ({
 
     const promise = mutateAsync({
       url: isEdit
-        ? `${BASE_API_URL}/api/notes/${newdata._id}`
-        : `${BASE_API_URL}/api/notes`,
+        ? `${BACKEND_URL}/api/notes/${newdata._id}`
+        : `${BACKEND_URL}/api/notes`,
 
       data,
       method: isEdit ? "PATCH" : "POST",
