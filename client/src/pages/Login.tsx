@@ -33,10 +33,10 @@ const Login = () => {
   const { user, setUser } = useAuth();
   const [error, setError] = useState<string | null>();
   const navigate = useNavigate();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
+  const BACKEND_BASE_URL = import.meta.env.VITE_API_BACKEND_URL as string;
   const onSubmit: SubmitHandler<UserCredentials> = async (data) => {
     const promise = mutateAsync({
-      url: `${API_BASE_URL}/auth/login`,
+      url: `${BACKEND_BASE_URL}/auth/login`,
       method: "POST",
       data,
     });
